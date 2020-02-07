@@ -3,18 +3,24 @@
 namespace Src;
 
 use Illuminate\Support\Str;
+use Src\Exceptions\UmovException;
 
 class Umov
 {
-    public function __get(string $name)
-    {
-        return $this->make($name);
-    }
-
-    private function make(string $resource)
+    /**
+     * @param string $resource
+     * @return mixed
+     * @throws UmovException
+     */
+    public function __get(string $resource)
     {
         $class = $this->resolveClassPath($resource);
-        return new $class();
+
+        if (class_exists($class)) {
+            return new $class();
+        } else {
+            throw new UmovException('This resource aren\'t avaliable');
+        }
     }
 
     private function resolveClassPath(string $resource)
