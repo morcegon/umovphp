@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  app:
+    container_name: umovphp-app
+    user: 1000:1000
+    image: webdevops/php:7.2
+    volumes:
+      - .:/app
+    ports:
+      - 80:80
+    environment:
+      - PHP_DISPLAY_ERRORS=1
