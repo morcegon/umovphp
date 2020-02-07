@@ -24,20 +24,6 @@ class BuilderTest extends TestCase
         self::assertEquals('item.xml', $endpoint);
     }
 
-    public function testCanBuildEndpointWithParams()
-    {
-        $this->builder->setTarget('item');
-        $endpoint = $this->builder->buildEndpoint(['params' => [
-            'foo' => 'bar',
-            'foo2' => 'bar2'
-        ]]);
-
-        self::assertEquals(
-            'item.xml?foo=bar&foo2=bar2',
-            $endpoint
-        );
-    }
-
     public function testCanBuildEndpointWithId()
     {
         $this->builder->setTarget('item');

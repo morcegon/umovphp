@@ -15,13 +15,15 @@ class Builder
                 ? "alternativeIdentifier/{$options['alternative']}" : null,
         ];
 
-        if (isset($options['params']) && !empty($options['params'])) {
-            $uri_params = '?' . http_build_query($options['params']);
-        }
-
         $uri = implode("/", array_filter($uri));
 
-        return "{$uri}.xml{$uri_params}";
+        return "{$uri}.xml";
+    }
+
+    public function getParms($options)
+    {
+        return !empty($options['params'])
+            ? ['query' => $options['params']] : [];
     }
 
     public function setTarget($target)
