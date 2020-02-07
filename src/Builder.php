@@ -6,15 +6,22 @@ class Builder
 {
     protected $target;
 
-    public function buildEndpoint($params = []): string
+    public function buildEndpoint($options = []): string
     {
-        $result_params = null;
+        $uri = [
+            'target' => $this->target,
+            'id' => $options['id'] ?? null,
+            'alternative' => $options['alternative']
+                ? "alternativeIdentifier/{$options['alternative']}" : null,
+        ];
 
-        if (!empty($params)) {
-            $result_params = '?' . http_build_query($params);
+        if (isset($options['params']) && !empty($options['params'])) {
+            $uri_params = '?' . http_build_query($options['params']);
         }
 
-        return "{$this->target}.xml{$result_params}";
+        $uri = implode("/", array_filter($uri));
+
+        return "{$uri}.xml{$uri_params}";
     }
 
     public function setTarget($target)
