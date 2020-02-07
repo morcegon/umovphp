@@ -1,0 +1,8 @@
+{
+  "name": "morcegon/umovphp",
+  "description": "A library to handle with uMov API",
+  "type": "library",
+  "require": {
+    "php": "^7.2.27"
+  }
+}
